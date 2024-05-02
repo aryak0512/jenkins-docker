@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh "mvn --version"
                 sh "docker --version"
+                sh "java --version"
                 echo "Building..."
                 sh "mvn clean install"
             }
