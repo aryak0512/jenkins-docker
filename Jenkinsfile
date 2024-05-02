@@ -4,8 +4,8 @@ pipeline {
     environment{
 
         // adding docker and maven to path, provided in config
-        mavenHome = tool 'myMaven'
-        dockerHome = tool 'myDocker'
+        mavenHome = tool 'my-maven'
+        dockerHome = tool 'my-docker'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
