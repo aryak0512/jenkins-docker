@@ -16,18 +16,21 @@ pipeline {
                 sh "mvn --version"
                 sh "docker --version"
                 echo "Building..."
+                sh "mvn clean install"
             }
         }
 
         stage("test") {
             steps {
                 echo "Testing..."
+                sh "mvn test"
             }
         }
 
         stage("integration test") {
             steps {
                 echo "Integration Testing..."
+                sh "mvn failsafe:integration-test failsafe:verify"
             }
         }
 
