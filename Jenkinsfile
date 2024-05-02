@@ -6,8 +6,8 @@ pipeline {
         // adding docker and maven to path, provided in config
         mavenHome = tool 'my-maven'
         dockerHome = tool 'my-docker'
-        jdkHome = tool 'my-jdk'
-        PATH = "$dockerHome/bin:$mavenHome/bin:$jdkHome/bin:$PATH"
+        //jdkHome = tool 'my-jdk'
+        PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
     stages {
