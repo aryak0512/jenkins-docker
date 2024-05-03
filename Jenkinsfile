@@ -45,7 +45,7 @@ pipeline {
         stage ("Create Docker Image"){
             steps{
                 script{
-                   dockerImage = docker.build("aryak0512/test-pipeline:latest")
+                   dockerImage = docker.build("aryak0512/my-app:latest")
                 }
             }
         }
@@ -53,14 +53,14 @@ pipeline {
         stage ("Push Docker Image"){
             steps{
                 script{
-
                     withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'passed', usernameVariable: 'name')]) {
-                        // some block
+
+                        // login to docker hub
                         sh 'docker login -u ${name} -p ${passed}'
-                        sh 'Docker login happened'
+
+                        // push to registry
+                        dockerImage.push()
                     }
-
-
                 }
             }
         }
