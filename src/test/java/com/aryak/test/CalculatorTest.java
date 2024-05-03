@@ -1,7 +1,5 @@
 package com.aryak.test;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +31,7 @@ class CalculatorTest {
 
     @Test
     void divide_by_zero() {
-        assertThrows(RuntimeException.class, ()->  calculator.divide(6,0));
+        assertThrows(DivisionByZeroException.class, ()->  calculator.divide(6,0));
     }
 
     @Test
