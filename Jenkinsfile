@@ -54,7 +54,7 @@ pipeline {
             steps{
                 script{
 
-                    docker.withRegistry('', docker){
+                    docker.withRegistry('', 'Docker'){
                         dockerImage.push()
                     }
 
