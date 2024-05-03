@@ -1,12 +1,15 @@
 pipeline {
+
     agent any
 
     environment{
 
-        // adding docker and maven to path, provided in config
+        // these params are binded to tabs in the Jenkins dashboard global configuration tab
         mavenHome = tool 'my-maven'
         dockerHome = tool 'my-docker'
         //jdkHome = tool 'my-jdk'
+
+        // adding docker and maven to path
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
 
@@ -41,11 +44,13 @@ pipeline {
                 echo "Deploying..."
             }
         }
-//
+
         stage ("Create Docker Image"){
             steps{
                 script{
-                   dockerImage = docker.build("aryak0512/my-app:latest")
+                    // image reference created
+                    dockerImage = docker.build("aryak0512/my-app:latest")
+                    echo "Docker image created..."
                 }
             }
         }
@@ -53,6 +58,7 @@ pipeline {
         stage ("Push Docker Image"){
             steps{
                 script{
+                    // retrieve auth details with id 'Docker' from credentials tab of Jenkins dashboard
                     withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'passed', usernameVariable: 'name')]) {
 
                         // login to docker hub
@@ -60,6 +66,7 @@ pipeline {
 
                         // push to registry
                         dockerImage.push()
+                        echo "Docker Image pushed to registry..."
                     }
                 }
             }
