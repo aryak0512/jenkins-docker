@@ -54,9 +54,12 @@ pipeline {
             steps{
                 script{
 
-                    docker.withRegistry('', 'Docker'){
-                        dockerImage.push()
+                    withCredentials([usernamePassword(credentialsId: 'Docker', passwordVariable: 'passed', usernameVariable: 'name')]) {
+                        // some block
+                        sh 'docker login -u ${name} -p ${passed}'
+                        sh 'Docker login happened'
                     }
+
 
                 }
             }
