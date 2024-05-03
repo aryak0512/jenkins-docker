@@ -41,6 +41,26 @@ pipeline {
                 echo "Deploying..."
             }
         }
+//
+        stage ("Create Docker Image"){
+            steps{
+                script{
+                   dockerImage = docker.build("aryak0512/test-pipeline:latest")
+                }
+            }
+        }
+
+        stage ("Push Docker Image"){
+            steps{
+                script{
+
+                    docker.withRegistry('', docker){
+                        dockerImage.push()
+                    }
+
+                }
+            }
+        }
     }
 
     post{
