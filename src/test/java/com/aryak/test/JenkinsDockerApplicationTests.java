@@ -2,6 +2,7 @@ package com.aryak.test;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -12,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 class JenkinsDockerApplicationTests {
 
+	@InjectMocks
+	JenkinsDockerApplication app;
+
 	@Test
 	 void applicationContextTest() {
 		JenkinsDockerApplication.main(new String[] {});
@@ -20,8 +24,6 @@ class JenkinsDockerApplicationTests {
 
 	@Test
 	void test_getMessage_is_not_null() {
-
-		JenkinsDockerApplication app = new JenkinsDockerApplication();
 		assertNotNull(app.getMessage());
 	}
 
